@@ -50,7 +50,7 @@ class DeleteMessages {
     rule.tz = 'Europe/Copenhagen';
 
     const job = schedule.scheduleJob(
-      `${guildId}_weekly_${hour}_${day.value}_${channel.id}`,
+      `${guildId}_weekly_${hour.value}_${day.value}_${channel.id}`,
       rule,
       async function () {
         const allMessages = await channel.messages.fetch();
@@ -143,6 +143,7 @@ class DeleteMessages {
         6: 'Saturday',
       };
 
+      console.log(hour);
       const response = await this.interaction.channel.send({
         content: `Type: ${type}\nHour: ${hour}:00\n${
           day * 1 === 99 ? '' : `Day: ${daysOfWeek[day]}\n`
